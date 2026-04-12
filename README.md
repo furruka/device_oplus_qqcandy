@@ -16,4 +16,5 @@ Warning:This device tree may only be applicable to ColorOS 15, kernel version 5.
 ```
 
 感谢：@山轮料叉 和 @是天天吖 的帮助
+
 也欢迎各位关注我的酷安账号：@Furruka
