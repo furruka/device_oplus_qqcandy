@@ -1,0 +1,29 @@
+# ADB
+ro.adb.secure=0
+ro.boot.dynamic_partitions=true
+
+# Fstab
+ro.postinstall.fstab.prefix=/system
+
+# USB MTP
+ro.sys.usb.storage.type=mtp
+
+# Crypto
+ro.crypto.volume.filenames_mode=aes-256-cts
+ro.crypto.metadata.enabled=true
+ro.crypto.support_metadata_encrypt=true
+ro.crypto.uses_fs_ioc_add_encryption_key=true
+ro.crypto.volume.metadata.method=dm-default-key
+ro.crypto.dm_default_key.options_format.version=2
+ro.crypto.volume.options=::v2
+ro.vendor.mtk_trustonic_tee_support=1
+
+# Gatekeeper
+ro.hardware.gatekeeper=trustonic
+
+# HideReflashTWRP
+ro.twrp.vendor_boot=true
+
+# Platform
+ro.vendor.mediatek.platform=OnePlus Ace Race
+ro.hardware=OnePlus Ace Race

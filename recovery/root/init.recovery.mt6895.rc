@@ -1,0 +1,116 @@
+import /tee.rc
+import /trustonic.rc
+
+on init
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller "11201000.usb0"
+    setprop sys.usb.ffs.aio_compat 1
+    export LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    mkdir /mnt/vendor/persist/mcRegistry
+    mkdir /mnt/vendor/persist
+    mount ext4 /dev/block/by-name/persist /mnt/vendor/persist rw
+    setprop crypto.ready 1
+
+on fs
+    install_keyring
+
+# We need vold early for metadata encryption
+on early-fs
+    start vold
+
+on late-fs
+    # Wait for keymaster
+    exec_start wait_for_keymaster
+
+    # Mount RW partitions which need run fsck
+    # mount_all /first_stage_ramdisk/fstab.mt6895 --late
+
+on post-fs
+    start boot-hal-1-2
+
+    # Support A/B feature for EMMC and UFS boot region
+    wait /dev/block/mmcblk0boot0 2
+    symlink /dev/block/sda /dev/block/mmcblk0boot0
+    symlink /dev/block/sdb /dev/block/mmcblk0boot1
+    symlink /dev/block/mmcblk0boot0 /dev/block/platform/bootdevice/by-name/preloader_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/platform/bootdevice/by-name/preloader_b
+
+    # Support A/B feature for combo emmc and ufs OTA update
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_emmc_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_emmc_b
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_ufs_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_ufs_b
+
+    # Support A/B feature for combo emmc and ufs OTA update
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/by-name/preloader_emmc_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/by-name/preloader_emmc_b
+    symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/by-name/preloader_ufs_a
+    symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/by-name/preloader_ufs_b
+
+    symlink /dev/block/mapper/pl_a /dev/block/by-name/preloader_raw_a
+    symlink /dev/block/mapper/pl_b /dev/block/by-name/preloader_raw_b
+
+    symlink /dev/block/platform/112b0000.ufshci /dev/block/bootdevice
+
+    start mtk.plpath.utils.link
+
+service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service wait_for_keymaster /system/bin/wait_for_keymaster
+    user root
+    group root system
+    priority -20
+    ioprio rt 0
+    seclabel u:r:recovery:s0
+
+service vendor.gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service vendor.keymint-trustonic /system/bin/android.hardware.security.keymint-service.trustonic
+    class early_hal
+    user nobody
+    seclabel u:r:recovery:s0
+
+on property:crypto.ready=1
+    start mobicore
+    start vendor.gatekeeper-1-0
+    start vendor.keymint-trustonic
+
+on property:hwservicemanager.ready=true
+    start mobicore
+    start vendor.keymint-trustonic
+    start vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
+    stop mobicore
+    stop vendor.keymint-trustonic
+    stop vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unencrypted
+    stop mobicore
+    stop vendor.keymint-trustonic
+    stop vendor.gatekeeper-1-0
+
+on property:twrp.decrypt.done=true
+    stop mobicore
+    stop vendor.keymint-trustonic
+    stop vendor.gatekeeper-1-0
+
+on property:crypto.ready=0
+    stop mobicore
+    stop vendor.keymint-trustonic
+    stop vendor.gatekeeper-1-0
+
+on boot
+    start health-hal-2-1
+    setprop sys.usb.config adb
