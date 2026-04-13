@@ -49,8 +49,6 @@ my_bigball /mnt/vendor/my_bigball ext4 ro,barrier=1 wait,slotselect,logical,firs
 my_bigball /mnt/vendor/my_bigball erofs ro wait,slotselect,logical,first_stage_mount,avb_keys=/vendor/etc/oplus_avb.pubkey
 my_manifest /mnt/vendor/my_manifest ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,avb_keys=/vendor/etc/oplus_avb.pubkey
 my_manifest /mnt/vendor/my_manifest erofs ro wait,slotselect,logical,first_stage_mount,avb_keys=/vendor/etc/oplus_avb.pubkey
-my_colorospro /mnt/vendor/my_colorospro ext4 ro,barrier=1 wait,slotselect,logical,first_stage_mount,nofail
-my_colorospro /mnt/vendor/my_colorospro erofs ro wait,slotselect,logical,first_stage_mount,nofail
 
 /dev/block/by-name/oplusreserve2 /mnt/vendor/oplusreserve ext4 nosuid,nodev,noatime,barrier=1 wait,check,first_stage_mount,nofail
 /dev/block/by-name/oplusreserve2 /mnt/oplus/op2 ext4 nosuid,nodev,noatime,barrier=1 check,first_stage_mount,nofail
@@ -65,7 +63,6 @@ my_colorospro /mnt/vendor/my_colorospro erofs ro wait,slotselect,logical,first_s
 /mnt/vendor/my_preload /my_preload none ro,bind wait,nofail
 /mnt/vendor/my_bigball /my_bigball none ro,bind wait,nofail
 /mnt/vendor/my_manifest /my_manifest none ro,bind wait,nofail
-/mnt/vendor/my_colorospro /my_colorospro none ro,bind wait,nofail
 
 
 

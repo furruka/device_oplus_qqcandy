@@ -26,6 +26,13 @@ on late-fs
     # mount_all /first_stage_ramdisk/fstab.mt6895 --late
 
 on post-fs
+    # Ensure /odm is over-mounted early to avoid /odm <-> /vendor/odm symlink loop
+    # in ramdisk skeleton before property probing (/odm/etc/build.prop, etc.).
+    mount erofs /dev/block/by-name/odm /odm ro
+    # Compatibility shim: some recovery code probes /odm/etc/build.prop,
+    # while this device only provides /odm/build.prop.
+    symlink /odm/build.prop /odm/etc/build.prop
+
     start boot-hal-1-2
 
     # Support A/B feature for EMMC and UFS boot region

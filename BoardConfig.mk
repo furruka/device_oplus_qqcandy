@@ -202,7 +202,8 @@ TW_INCLUDE_FASTBOOTD := true
 TW_INCLUDE_FUSE_EXFAT := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_PREPARE_DATA_MEDIA_EARLY := true
+# Avoid repeated pre-decrypt /data mount attempts on encrypted devices.
+TW_PREPARE_DATA_MEDIA_EARLY := false
 TW_USE_NEW_MINADBD := true
 TW_EXCLUDE_APEX := true
 TW_NO_LEGACY_PROPS := true

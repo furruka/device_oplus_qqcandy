@@ -9,3 +9,7 @@ export FOX_VENDOR_BOOT_RECOVERY=1
 # Suppress "Flash Current OrangeFox" / "Reflash after ROM" features,
 # which are incompatible with vendor_boot devices.
 export OF_NO_REFLASH_CURRENT_ORANGEFOX=1
+
+# Hide flashlight UI entry on this device: kernel exposes MTK flashlight_core
+# multi-argument interface, which is not compatible with TWRP single-node torch.
+export OF_FLASHLIGHT_ENABLE=0
