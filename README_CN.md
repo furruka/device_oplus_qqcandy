@@ -16,11 +16,8 @@ GPU     | Mali-G610 MC6
 支持的刷新率 | 30/45/60/75/90/120Hz
 屏幕类型 | LTPS LCD屏幕
 
-![OnePlus Ace Race](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2022/operation/may/cn/540x540-grey.png)
-
-
 <p align="center">
-  <img src="https://growth-cdn.ticwear.com/ticbuy/img/ticwatche3-style-watch-black.0.png](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2022/operation/may/cn/540x540-grey.png" width="243">
+  <img src="https://oasisstatics.oneplus.cn/content/dam/oasis/page/2022/operation/may/cn/540x540-grey.png" width="243">
 </p>
 
 正常工作的:
