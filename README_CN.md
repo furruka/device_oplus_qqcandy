@@ -18,6 +18,11 @@ GPU     | Mali-G610 MC6
 
 ![OnePlus Ace Race](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2022/operation/may/cn/540x540-grey.png)
 
+
+<p align="center">
+  <img src="https://growth-cdn.ticwear.com/ticbuy/img/ticwatche3-style-watch-black.0.png](https://oasisstatics.oneplus.cn/content/dam/oasis/page/2022/operation/may/cn/540x540-grey.png" width="243">
+</p>
+
 正常工作的:
 - [X] ADB调试
 - [X] data解密 (Android 15/16)
@@ -25,7 +30,7 @@ GPU     | Mali-G610 MC6
 - [X] Fasbootd模式
 - [X] 卡刷模式
 - [X] MTP文件传输
-- [X] Sideload侧载刷入
+- [] Sideload侧载刷入
 - [X] USB OTG功能
 - [X] 震动
 - [X] 触摸
