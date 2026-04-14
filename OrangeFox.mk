@@ -2,7 +2,8 @@
 # OrangeFox Recovery build variables for qqcandy (OnePlus Ace Race / mt6895)
 #
 
-FOX_VERSION := R12.0
+FOX_MAIN_VERSION := R12.0
+FOX_MAINTAINER_PATCH_VERSION := 0
 FOX_VARIANT := c15
 OF_MAINTAINER := Furruka
 FOX_BUILD_TYPE := Unofficial
