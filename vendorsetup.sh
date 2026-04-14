@@ -33,4 +33,6 @@ export TARGET_DEVICE_ALT=qqcandy
 export FOX_INSTALLER_DISABLE_AUTOREBOOT=1
 export FOX_DELETE_AROMAFM=1
 export FOX_VARIANT="c15"
-
+export FOX_VERSION="R12.0"
+export FOX_BUILD_TYPE="Unofficial"
+export OF_MAINTAINER="Furruka"
