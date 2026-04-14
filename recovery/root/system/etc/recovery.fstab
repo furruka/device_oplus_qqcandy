@@ -44,7 +44,7 @@ my_manifest /my_manifest erofs ro wait,slotselect,logical,first_stage_mount,nofa
 /dev/block/by-name/oplusreserve2 /cache ext4 noatime,nosuid,nodev,noauto_da_alloc,discard wait,check,formattable,first_stage_mount
 
 #/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v1
-/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity,fscompress
+/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
 /dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard wait,check,formattable,first_stage_mount
 
 /dev/block/by-name/protect1 /protect_f ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
@@ -118,9 +118,7 @@ my_manifest /my_manifest erofs ro wait,slotselect,logical,first_stage_mount,nofa
 
 
 /dev/block/by-name/otp /otp emmc defaults defaults
-/dev/block/by-name/odm /custom ext4 ro wait,verify,recoveryonly
 /dev/block/mmcblk0p1 /external_sd vfat  nosuid,nodev defaults
-/dev/block/sdd1 /usb_otg vfat nosuid,nodev defaults
 /dev/block/by-name/vbmeta /vbmeta emmc defaults defaults
 #Yang.Li@PSW.AD.Recovery.1122242, 2018/03/22, Add for critical log in mtk platform
 /dev/block/by-name/reserve2            /reserve2       emmc    defaults                                                      defaults
