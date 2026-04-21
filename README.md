@@ -36,7 +36,7 @@ Works:
 - [X] MTP
 - [X] Sideload
 - [X] USB OTG
-- [] Vibrator
+- [X] Vibrator
 - [X] Touch
 
 ## Compile
